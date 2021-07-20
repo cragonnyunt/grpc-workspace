@@ -1,8 +1,8 @@
-# GRPC Workspace
+# Protobuf Workspace
 
-[![GRPC Workspace CI](https://github.com/cragonnyunt/grpc-workspace/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/cragonnyunt/grpc-workspace/actions/workflows/main.yml)
+[![Protobuf Workspace CI](https://github.com/cragonnyunt/proto-workspace/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/cragonnyunt/proto-workspace/actions/workflows/main.yml)
 
-GRPC Workspace Docker is docker built for protocol buffer and GRPC code generator. It contains tools and plugins for protobuf and grpc code generation. 
+Protobuf Workspace Docker is docker built for protocol buffer and GRPC code generator. It contains tools and plugins for protobuf and grpc code generation.
 
 Set of tools installed
 - protoc (Protobuf compiler)
@@ -12,11 +12,13 @@ Set of tools installed
 - grpc_objective_c_plugin
 - grpc_php_plugin
 - grpc_ruby_plugin
+- protoc-gen-go
+- protoc-gen-go-grpc
 
 ## Pulling the image
 
 ```sh
-docker pull cragonnyunt/grpc-workspace-docker
+docker pull cragonnyunt/proto-workspace-docker
 ```
 
 ## Running the image
@@ -24,7 +26,7 @@ docker pull cragonnyunt/grpc-workspace-docker
 ```sh
 docker run --rm -it \
     -v $(pwd):/workspace \
-    cragonnyunt/grpc-workspace-docker
+    cragonnyunt/proto-workspace-docker
 ```
 
 # Usage
