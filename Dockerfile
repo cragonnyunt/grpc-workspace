@@ -1,4 +1,4 @@
-FROM cragonnyunt/development-docker:latest as downloader1
+FROM cragonnyunt/development-docker:latest as downloader
 
 RUN apt-get update && \
     apt-get install -y \
@@ -28,8 +28,6 @@ RUN bash -xc "\
     popd; \
     "
 
-FROM cragonnyunt/development-docker:latest as downloader2
-
 # Installing go for protoc
 RUN curl -L -o go1.16.6.linux-amd64.tar.gz https://dl.google.com/go/go1.16.6.linux-amd64.tar.gz && \
     tar -C /usr/local -xzf go1.16.6.linux-amd64.tar.gz && \
@@ -44,14 +42,14 @@ RUN bash -xc "go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.27 && \
 
 FROM cragonnyunt/development-docker:latest
 
-COPY --from=downloader1 /tmp/protoc /usr/
+COPY --from=downloader /tmp/protoc /usr/
 
-COPY --from=downloader1 /tmp/grpc/cmake/build/grpc_cpp_plugin /usr/local/bin/grpc_cpp_plugin
-COPY --from=downloader1 /tmp/grpc/cmake/build/grpc_csharp_plugin /usr/local/bin/grpc_csharp_plugin
-COPY --from=downloader1 /tmp/grpc/cmake/build/grpc_node_plugin /usr/local/bin/grpc_node_plugin
-COPY --from=downloader1 /tmp/grpc/cmake/build/grpc_objective_c_plugin /usr/local/bin/grpc_objective_c_plugin
-COPY --from=downloader1 /tmp/grpc/cmake/build/grpc_php_plugin /usr/local/bin/grpc_php_plugin
-COPY --from=downloader1 /tmp/grpc/cmake/build/grpc_ruby_plugin /usr/local/bin/grpc_ruby_plugin
-
-COPY --from=downloader2 /root/go/bin/protoc-gen-go /usr/local/bin/protoc-gen-go
-COPY --from=downloader2 /root/go/bin/protoc-gen-go-grpc /usr/local/bin/protoc-gen-go-grpc
+COPY --from=downloader /tmp/grpc/cmake/build/grpc_cpp_plugin \
+    /tmp/grpc/cmake/build/grpc_csharp_plugin \
+    /tmp/grpc/cmake/build/grpc_node_plugin \
+    /tmp/grpc/cmake/build/grpc_objective_c_plugin \
+    /tmp/grpc/cmake/build/grpc_php_plugin \
+    /tmp/grpc/cmake/build/grpc_ruby_plugin \
+    /root/go/bin/protoc-gen-go \
+    /root/go/bin/protoc-gen-go-grpc \
+    /usr/local/bin/
