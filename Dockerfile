@@ -39,7 +39,7 @@ ENV GOROOT=/usr/local/go
 
 ENV PATH=${PATH}:${GOROOT}/bin:${GOPATH}/bin
 
-RUN bash -xc "go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.26 && \
+RUN bash -xc "go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.27 && \
     go install -v google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1"
 
 FROM cragonnyunt/development-docker:latest
